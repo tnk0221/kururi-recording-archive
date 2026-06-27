@@ -1,0 +1,90 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>くるり録音メンバーアーカイブ</title>
+
+  <style>
+    body {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      font-family: sans-serif;
+      background: #f7f5f0;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .song {
+      background: white;
+      margin-bottom: 12px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .song a {
+      text-decoration: none;
+      color: #333;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .status {
+      margin-top: 5px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      .song a {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>くるり録音メンバーアーカイブ</h1>
+
+  <p class="subtitle">
+    「この曲、誰が演奏しているんだろう？」を調べるための非公式ファンデータベース
+  </p>
+
+  <h2>儚くも美しき12の変奏</h2>
+
+  <div id="song-list"></div>
+
+  <footer>
+    © Kururi Recording Members Archive
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
+```

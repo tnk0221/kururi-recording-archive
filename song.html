@@ -1,0 +1,161 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>曲情報</title>
+
+  <style>
+    body {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      font-family: sans-serif;
+      background: #f7f5f0;
+      color: #333;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    h2 {
+      margin-top: 30px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <h1 id="title">読み込み中…</h1>
+
+  <p>
+    <strong>アルバム：</strong>
+    <span id="album"></span>
+  </p>
+
+  <p>
+    <strong>トラック番号：</strong>
+    <span id="track"></span>
+  </p>
+
+  <p>
+    <strong>情報の確度：</strong>
+    <span id="status"></span>
+  </p>
+
+  <h2>録音メンバー</h2>
+
+  <div id="members">
+    情報未入力
+  </div>
+
+  <h2>備考</h2>
+
+  <div id="notes">
+    なし
+  </div>
+
+  <a class="back" href="index.html">
+    ← 曲一覧へ戻る
+  </a>
+
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+fetch("songs.json")
+  .then(response => response.json())
+  .then(songs => {
+
+    const song = songs.find(s => s.id === id);
+
+    if (!song) {
+      document.body.innerHTML = "<h1>曲が見つかりません。</h1>";
+      return;
+    }
+
+    document.title = song.title;
+    document.getElementById("title").textContent =
+      song.title;
+
+    document.getElementById("album").textContent =
+      song.album;
+
+    document.getElementById("track").textContent =
+      song.trackNumber;
+
+    document.getElementById("status").textContent =
+      song.status;
+
+    const membersDiv =
+      document.getElementById("members");
+
+    if (
+      !song.members ||
+      Object.keys(song.members).length === 0
+    ) {
+      membersDiv.innerHTML = "情報未入力";
+    } else {
+
+      let html = "<ul>";
+
+      for (const role in song.members) {
+
+        const names = song.members[role];
+
+        if (names.length > 0) {
+          html += `
+            <li>
+              ${role}：
+              ${names.join("、")}
+            </li>
+          `;
+        }
+      }
+
+      html += "</ul>";
+
+      membersDiv.innerHTML = html;
+    }
+
+    if (song.notes) {
+      document.getElementById("notes")
+        .textContent = song.notes;
+    }
+  });
+</script>
+
+</body>
+</html>
+```
