@@ -1,4 +1,4 @@
-```javascript
+javascript
 fetch("songs.json")
   .then(response => {
     if (!response.ok) {
