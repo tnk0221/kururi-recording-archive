@@ -1,4 +1,4 @@
-```javascript id="5gv6s9"
+```javascript
 fetch("songs.json")
   .then(response => {
     if (!response.ok) {
@@ -32,4 +32,3 @@ fetch("songs.json")
     document.getElementById("song-list").innerHTML =
       "<p>曲データの読み込みに失敗しました。</p>";
   });
-```
